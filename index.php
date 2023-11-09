@@ -50,6 +50,31 @@ Chaque produit peut être une instance d'une classe. -->
 <hr>
 
 <!-- liste de maison -->
+<h2 class="mb-3 ms-5">Liste des propriétées</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Type de bien</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Surface (en m²)</th>
+            <th scope="col">Prix (en €)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            // foreach ($propert as $
+        ?>
+        <tr>
+            <th scope="row">1</th>
+            <td>Bien</td>
+            <td>Adresse</td>
+            <td>Surface</td>
+            <td>Prix</td>
+        </tr>
+    </tbody>
+</table>
+
 
 
 
