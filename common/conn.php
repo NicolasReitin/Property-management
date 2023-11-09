@@ -7,7 +7,6 @@ $password = "";
 
 try
 {
-    // $bdd=new PDO('mysql:'.$host.', '.$database.';'.$username.',""');
     $bdd=new PDO('mysql:host=localhost;dbname=gestion_maisons','root','');
 }
 catch(Exception $e)
