@@ -9,14 +9,27 @@ document.addEventListener("DOMContentLoaded", function(){
         const chaine = document.getElementById(type).value;
 
         if (chaine  == ''){
-            document.getElementById('span_' + type).innerHTML = "Non renseignée !";
+            document.getElementById('span_' + type).innerHTML = "Non renseignée";
             document.getElementById('span_' + type).style = "color: red;";
-            return false;
         }else{
-            document.getElementById('span_' + type).innerHTML = "Valide";
-            document.getElementById('span_' + type).style = "color: green;";
-            return true;
+            if (type == 'surface' || type == 'prix'){
+                if(isNaN(chaine)){
+                    document.getElementById('span_' + type).innerHTML = "Merci d'indiquer un nombre !";
+                    document.getElementById('span_' + type).style = "color: red;";
+                }else{
+                    document.getElementById('span_' + type).innerHTML = "Valide";
+                    document.getElementById('span_' + type).style = "color: green;";
+                }
+                
+            }else{
+                document.getElementById('span_' + type).innerHTML = "Valide";
+                document.getElementById('span_' + type).style = "color: green";
+            }
+            
         }
+
+        
+        
     }
 
 

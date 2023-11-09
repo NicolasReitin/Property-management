@@ -25,7 +25,7 @@ Chaque produit peut être une instance d'une classe. -->
     <div class="form-group">
         <label class="ms-5" for="type"><h4>Type de bien</h4></label>
         <select name="type" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
-            <option selected>Select type</option>
+            <option selected disabled hidden>Select le type de bien</option>
             <option value="1">Terrain</option>
             <option value="2">Maison</option>
             <option value="3">Appartement</option>

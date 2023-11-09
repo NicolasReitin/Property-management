@@ -29,10 +29,12 @@ if (isset($_POST['type']) && isset($_POST['adresse']) && isset($_POST['surface']
 
         $property = new Property($type, $adresse, $surface, $prix);        
 
-        $query = "INSERT INTO `proprietes`(`type`, `adresse`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
-        $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
+        // $query = "INSERT INTO `proprietes`(`type`, `adresse`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
+        // $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
 
-        $request->execute(array($property->getType(), $property->getAdresse(), $property->getSurface(), $property->getPrix()));
+        // $request->execute(array($property->getType(), $property->getAdresse(), $property->getSurface(), $property->getPrix()));
+
+        $property->insertInto($pdo, $property);
 
         header('location: ../index.php');
 

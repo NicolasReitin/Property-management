@@ -44,6 +44,17 @@ class Property {
         
     }
 
+    public function insertInto($pdo, $property ){ //propriétés = nom de la variable de la bdd + nom de la variable prenant la classe Property
+        $query = "INSERT INTO `proprietes`(`type`, `adresse`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
+        $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
+
+        $request->execute(array($property->getType(), $property->getAdresse(), $property->getSurface(), $property->getPrix()));
+    }
+
+    
+
+    
+
 
 
 }
