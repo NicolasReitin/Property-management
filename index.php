@@ -71,6 +71,7 @@ Chaque produit peut être une instance d'une classe. -->
                     <td><?= $property['adresse'] ?></td>
                     <td><?= $property['surface'] ?></td>
                     <td><?= $property['prix'] ?></td>
+
                     <td>
                         <a href="controllers/editProperty.php?id=<?= $property['id'] ?>">
                             <button class="btn btn-warning" type="button">Edit</button>
@@ -81,6 +82,7 @@ Chaque produit peut être une instance d'une classe. -->
                             <button class="btn btn-danger" type="button">X</button>
                         </a>
                     </td>                </tr>
+
 
                 <?php
                 
