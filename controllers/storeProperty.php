@@ -36,5 +36,9 @@ if (isset($_POST['type']) && isset($_POST['adresse']) && isset($_POST['surface']
 
         header('location: ../index.php');
 
+    }else{
+        header('Location: ../index.php');
     }
+}else{
+    header('Location: ../index.php');
 }

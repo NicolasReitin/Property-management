@@ -1,6 +1,6 @@
 <?php 
-require_once '../common/conn.php';
-require_once '../classes/Property.php';
+require_once 'common/conn.php';
+require_once 'classes/Property.php';
 
 ?>
 
@@ -21,7 +21,6 @@ require_once '../classes/Property.php';
 <h2 class="mb-3 ms-5">Modifier la proprété</h2>
 
 <?php
-
             $select = 'SELECT * FROM proprietes WHERE `id` ='.$_GET['id'];
             $request = $pdo->prepare($select);
             $request->execute();
@@ -48,7 +47,7 @@ require_once '../classes/Property.php';
             }            
 ?>
 
-<form action="#" method="post">
+<form action="controllers/updateProperty?id=<?= $_GET['id'] ?>" method="post">
     <label class="ms-5" for="type"><h4>Type de bien</h4></label>
     <select name="type" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
         <option selected disabled hidden>Select type</option>
@@ -67,45 +66,6 @@ require_once '../classes/Property.php';
     <input class="form-control ms-5 mb-2" type="text" name="prix" id="prix" style="width: 500px" value="<?= $property->getPrix() ?>">
 
     <button class="btn btn-warning ms-5 mt-3" type="submit">Modifier</button>
-
-    <?php
-        if(!empty($_POST)){
-
-            $type = strip_tags($_POST['type']);
-            $adresse = strip_tags($_POST['adresse']);
-            $surface = (int) strip_tags($_POST['surface']);
-            $prix = (int) strip_tags($_POST['prix']);
-
-            switch ($type){
-                case 1 :
-                    $type = "Terrain";
-                    break;
-                case 2 :
-                    $type = "Maison";
-                    break;
-                case 3 :
-                    $type = "Appartement";
-                    break;
-            }
-               
-            $newProperty = new Property($type, $adresse, $surface, $prix);
-    
-            // $query = "UPDATE `proprietes` SET `type`=".$newProperty->getType().",`adresse`=".$newProperty->getAdresse().",`surface`=".$newProperty->getSurface().",`prix`=".$newProperty->getPrix()."WHERE `id`=".$_GET['id']."";
-    
-            $query = "UPDATE `proprietes` SET `type`=?, `adresse`=?, `surface`=?, `prix`=? WHERE `id`= ?";
-    
-    
-            $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
-    
-            $request->execute(array($newProperty->getType(), $newProperty->getAdresse(), $newProperty->getSurface(), $newProperty->getPrix(), $_GET['id']));
-
-            header('location: ../index.php');
-    
-    
-        }
-        
-    ?>
-
 
 </form>
 
