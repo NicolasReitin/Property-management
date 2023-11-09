@@ -1,3 +1,9 @@
+<?php 
+
+require_once 'common/conn.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +60,7 @@ Chaque produit peut être une instance d'une classe. -->
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">Id</th>
             <th scope="col">Type de bien</th>
             <th scope="col">Adresse</th>
             <th scope="col">Surface (en m²)</th>
@@ -63,15 +69,28 @@ Chaque produit peut être une instance d'une classe. -->
     </thead>
     <tbody>
         <?php
-            // foreach ($propert as $
+            $select = 'SELECT * FROM proprietes';
+            $request = $pdo->prepare($select);
+            $request->execute();
+            $properties = $request->fetchAll();
+
+            foreach ($properties as $property) {
+                ?>
+                <tr>
+                    <th scope="row"><?= $property['id'] ?></th>
+                    <td><?= $property['type'] ?></td>
+                    <td><?= $property['adresse'] ?></td>
+                    <td><?= $property['surface'] ?></td>
+                    <td><?= $property['prix'] ?></td>
+                    <td><a href=""><button class="btn btn-warning" type="button">Edit</button></a></td>
+                    <td><button class="btn btn-danger" type="button">X</button></td>
+                </tr>
+
+                <?php
+                
+            }
         ?>
-        <tr>
-            <th scope="row">1</th>
-            <td>Bien</td>
-            <td>Adresse</td>
-            <td>Surface</td>
-            <td>Prix</td>
-        </tr>
+        
     </tbody>
 </table>
 
