@@ -1,23 +1,24 @@
 <?php 
-require_once '../common/conn.php';
-require_once '../classes/Terrain.php';
+require_once '../common/conn.php'; // appel de la BDD
+require_once '../classes/Terrain.php';  // appel de la classe Terrain
 
     if(!empty($_POST)){
         // var_dump($_GET['id']);
         // die();
 
+        // on récupère les valeurs du form via la méthod POST
         $projet = strip_tags($_POST['projetTerrain']);
         $ville = strip_tags($_POST['villeTerrain']);
         $surface = (int) strip_tags($_POST['surfaceTerrain']);
         $prix = (int) strip_tags($_POST['prixTerrain']);
             
+        //on créé un nouvel objet Terrain
         $newTerrain = new Terrain($projet, $ville, $surface, $prix);
 
-        $query = "UPDATE `terrains` SET `projet`=?, `ville`=?, `surface`=?, `prix`=? WHERE `id`= ?";
-        $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
+        // on utilise la fonction update de la classe pour mettre a jour les infos du new form
+        $newTerrain->update($pdo);
 
-        $request->execute(array($newTerrain->getProjet(), $newTerrain->getVille(), $newTerrain->getSurface(), $newTerrain->getPrix(), $_GET['id']));
-
+        // on redirige vers l'index
         header('location: ../index.php');
     }
 ?>    

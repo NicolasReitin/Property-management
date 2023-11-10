@@ -1,12 +1,11 @@
 <?php 
-require_once 'common/conn.php';
+require_once 'common/conn.php'; //appel de la bdd
 
-
-
+// select tous les terrains pour les afficher dans le tableau et les options du select
 $select = 'SELECT * FROM terrains ORDER BY `ville` ASC';
 $request = $pdo->prepare($select);
 $request->execute();
-$terrains = $request->fetchAll();
+$terrains = $request->fetchAll(); //récupère le résultat
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +72,7 @@ $terrains = $request->fetchAll();
                 <select name="terrain" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
                     <option selected disabled hidden>Selectionner le terrain</option>
                     <?php 
+                    //options selon les terrains de la BDD
                         foreach ($terrains as $terrain) {
                             echo '<option value="'.$terrain['id'].' ">'.$terrain['projet'].' - '.$terrain['ville'].'</option>';
                         }
@@ -137,7 +137,7 @@ $terrains = $request->fetchAll();
             </thead>
             <tbody>
                 <?php
-                    
+                    // tableau avec les valeur de la BDD avec un foreach pour toutes les faire apparaitre
                     foreach ($terrains as $terrain) {
                         ?>
                         <tr>
@@ -179,6 +179,7 @@ $terrains = $request->fetchAll();
             </thead>
             <tbody>
                 <?php
+                // select toutes les propriétés de la BDD
                     $select = 'SELECT * FROM proprietes ORDER BY `id` DESC';
                     $request = $pdo->prepare($select);
                     $request->execute();
@@ -195,7 +196,7 @@ $terrains = $request->fetchAll();
                             <td><?= $property['prix'] ?></td>
 
                             <td>
-                                <!-- <a href="controllers/updateProperty.php?id=<?= $property['id'] ?>"> -->
+                                <!-- affiche un bouton et on lui rajoute dans l'url de destination l'id pour le récupérer dans le store -->
                                 <a href="editProperty.php?id=<?= $property['id'] ?>">
                                     <button class="btn btn-warning" type="button">Edit</button>
                                 </a>
@@ -217,9 +218,6 @@ $terrains = $request->fetchAll();
     </div>
 
 </div>
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="js\script.js"></script>

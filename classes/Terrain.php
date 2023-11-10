@@ -42,12 +42,21 @@ final class Terrain extends SurfacePlusPrix { //
     public function setPrix(){
         
     }
-
-    public function insertInto($pdo){ //propriétés = nom de la variable de la bdd + nom de la variable prenant la classe Property
+    
+     // fonction pour insérer les données du formulaire de création dans la bdd
+    public function insertInto($pdo){ //propriétés = nom de la variable de la bdd
         $query = "INSERT INTO `terrains`(`projet`, `ville`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
         $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
 
         $request->execute(array($this->projet, $this->ville, $this->surface, $this->prix));
+    }
+
+    // fonction pour update les données du formulaire dans la bdd
+    public function update($pdo){
+        $query = "UPDATE `terrains` SET `projet`=?, `ville`=?, `surface`=?, `prix`=? WHERE `id`= ?";
+        $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
+
+        $request->execute(array($this->projet, $this->ville, $this->surface, $this->prix, $_GET['id']));
     }
 
     

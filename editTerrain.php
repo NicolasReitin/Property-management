@@ -1,6 +1,6 @@
 <?php 
-require_once 'common/conn.php';
-require_once 'classes/Terrain.php';
+require_once 'common/conn.php'; // appel de la BDD
+require_once 'classes/Terrain.php'; // appel de la classe Terrain
 
 ?>
 
@@ -19,20 +19,22 @@ require_once 'classes/Terrain.php';
 <!-- formulaire de modification -->
 
 <?php
+    // select le terrain qui possède l'id envoyé avec le bouton edit via l'url et la method GET
             $select = 'SELECT * FROM terrains WHERE `id` ='.$_GET['id'];
-            $request = $pdo->prepare($select);
-            $request->execute();
-            $terrain = $request->fetch();
+            $request = $pdo->prepare($select); // prépare la requête
+            $request->execute(); // execute la requête
+            $terrain = $request->fetch(); // recupère les résultats et les affiche ensuite
 
             $type = $terrain['projet'];
             $adresse  = $terrain['ville'];
             $surface = $terrain['surface'];
             $prix = $terrain['prix'];
 
+            // appel de la classe Terrain avec son constructeur
             $terrain = new Terrain($type, $adresse, $surface, $prix);
             
+            // utilisation des la classe puis pré-affichage des informations récupérées en BDD dans les input
 ?>
-
 <form action="controllers\updateTerrain.php?id=<?= $_GET['id'] ?>" method="post">
             <div class="form-group">
                 <label class="ms-5" for="projetTerrain"><h4>Nom du projet</h4></label>

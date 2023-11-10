@@ -4,20 +4,20 @@ require_once 'SurfacePlusPrix.php';
 final class Property extends SurfacePlusPrix{
     private $terrain;
     private $adresse;
-    private $nombreDePiece;
+    private $nombreDePieces;
 
-    public function __construct($terrain, $adresse, $surface, $nombreDePiece, $prix) {
+    public function __construct($terrain, $adresse, $surface, $nombreDePieces, $prix) {
         parent::__construct($surface, $prix);
         $this->terrain = $terrain;
         $this->adresse = $adresse;
-        $this->nombreDePiece = $nombreDePiece;
+        $this->nombreDePieces = $nombreDePieces;
     }
 
-    public function getType() : string{
-        return $this->type;
+    public function getTerrain() : string{
+        return $this->terrain;
     }
 
-    public function setType(){
+    public function setTerrain(){
 
     }
 
@@ -37,6 +37,14 @@ final class Property extends SurfacePlusPrix{
 
     }
 
+    public function getNombreDePieces() :int{
+        return $this->nombreDePieces;
+    }
+    
+    public function setNombreDePieces(){
+        
+    }
+
     public function getPrix() :int{
         return $this->prix;
     }
@@ -49,7 +57,7 @@ final class Property extends SurfacePlusPrix{
         $query = "INSERT INTO `proprietes`(`type`, `adresse`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
         $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
 
-        $request->execute(array($property->getType(), $property->getAdresse(), $property->getSurface(), $property->getPrix()));
+        $request->execute(array($this->terrain, $this->adresse, $this->surface, $this->nombreDePieces, $this->prix));
     }
 
     

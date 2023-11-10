@@ -6,7 +6,6 @@ abstract class SurfacePlusPrix {
     public function __construct(string $surface, int $prix) {
         $this->surface = $surface;
         $this->prix = $prix;
-        
     }
 
 
