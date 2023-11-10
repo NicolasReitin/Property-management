@@ -1,38 +1,24 @@
 <?php 
-require_once '../common/conn.php';
-require_once '../classes/Property.php';
+require_once '../common/conn.php'; // appel de la BDD
+require_once '../models/Property.php';  // appel de la classe Property
 
     if(!empty($_POST)){
-        var_dump($_GET['id']);
+        // var_dump($_GET['id']);
 
-        $type = strip_tags($_POST['type']);
-        $adresse = strip_tags($_POST['adresse']);
-        $surface = (int) strip_tags($_POST['surface']);
-        $prix = (int) strip_tags($_POST['prix']);
+        // on récupère les valeurs du form via la méthod POST
+        $terrain = strip_tags($_POST['terrain']);
+        $adresse = strip_tags($_POST['adresseProperty']);
+        $surface = (int) strip_tags($_POST['surfaceProperty']);
+        $nbrDePieces = (int) strip_tags($_POST['piecesProperty']);
+        $prix = (int) strip_tags($_POST['prixProperty']);
 
-        switch ($type){
-            case 1 :
-                $type = "Terrain";
-                break;
-            case 2 :
-                $type = "Maison";
-                break;
-            case 3 :
-                $type = "Appartement";
-                break;
-        }
-            
-        $newProperty = new Property($type, $adresse, $surface, $prix);
+        //on créé un nouvel objet Property
+        $newProperty = new Property($terrain, $adresse, $surface, $nbrDePieces, $prix); 
 
-        echo $newProperty->getPrix();
+        // on utilise la fonction update de la classe pour mettre a jour les infos du new form
+        $newProperty->update($pdo);
 
-        $query = "UPDATE `proprietes` SET `type`=?, `adresse`=?, `surface`=?, `prix`=? WHERE `id`= ?";
-
-
-        $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
-
-        $request->execute(array($newProperty->getType(), $newProperty->getAdresse(), $newProperty->getSurface(), $newProperty->getPrix(), $_GET['id']));
-
+        // on redirige vers l'index
         header('location: ../index.php');
     }
 ?>    

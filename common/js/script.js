@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function(){
 
 
-    const verifAdresse = document.getElementById('adresse');
-    const verifSurface = document.getElementById('surface');
-    const verifPrix = document.getElementById('prix');
+    const verifAdresse = document.getElementById('villeTerrain');
+    const verifSurface = document.getElementById('surfaceTerrain');
+    const verifPrix = document.getElementById('prixTerrain');
 
     function verifChaine(type) {
         const chaine = document.getElementById(type).value;
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(){
             document.getElementById('span_' + type).innerHTML = "Non renseignée";
             document.getElementById('span_' + type).style = "color: red;";
         }else{
-            if (type == 'surface' || type == 'prix'){
+            if (type == 'surfaceTerrain' || type == 'prixTerrain'){
                 if(isNaN(chaine)){
                     document.getElementById('span_' + type).innerHTML = "Merci d'indiquer un nombre !";
                     document.getElementById('span_' + type).style = "color: red;";
@@ -35,15 +35,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
 // Initialisation de nos évènements déclenchant nos fonctions
     verifAdresse.addEventListener('keyup', function(){
-		verifChaine('adresse');
+		verifChaine('villeTerrain');
 	});
 
 	verifSurface.addEventListener('keyup', function(){
-		verifChaine('surface');
+		verifChaine('surfaceTerrain');
 	});
 
     verifPrix.addEventListener('keyup', function(){
-		verifChaine('prix');
+		verifChaine('prixTerrain');
 	});
 
 
