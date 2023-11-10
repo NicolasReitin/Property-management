@@ -1,6 +1,6 @@
 <?php
 require_once '../common/conn.php'; //appel de la bdd
-require_once '../classes/Terrain.php'; // appel de la classe Terrain
+require_once '../models/Terrain.php'; // appel de la classe Terrain
 
 
 // var_dump($_POST);

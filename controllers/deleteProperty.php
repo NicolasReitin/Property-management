@@ -1,6 +1,6 @@
 <?php 
 require_once '../common/conn.php'; // appel de la bdd
-require_once '../classes/Property.php'; // appel de la classe
+require_once '../models/Property.php'; // appel de la classe
 
 
 // on select la ligne a delete

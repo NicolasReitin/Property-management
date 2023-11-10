@@ -1,6 +1,6 @@
 <?php 
 require_once '../common/conn.php'; // appel de la BDD
-require_once '../classes/Property.php'; // appel de la classe Property
+require_once '../models/Property.php'; // appel de la classe Property
 
 ?>
 

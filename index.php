@@ -217,11 +217,9 @@ $properties = $request->fetchAll();
                                     <a href="controllers/deleteProperty.php?id=<?= $property['id'] ?>">
                                         <button class="btn btn-danger" type="button">X</button>
                                     </a>
-                                </td>                </tr>
-    
-    
+                                </td>                
+                            </tr>
                             <?php
-                            
                         }
                     ?>
                     
