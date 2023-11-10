@@ -16,7 +16,7 @@ if (isset($_POST['projetTerrain']) && isset($_POST['villeTerrain']) && isset($_P
 
         $terrain = new Terrain($projet, $ville, $surface, $prix);        
 
-        $terrain->insertInto($pdo, $terrain);
+        $terrain->insertInto($pdo);
 
         header('location: ../index.php');
 

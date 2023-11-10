@@ -25,14 +25,8 @@ if (isset($_POST['type']) && isset($_POST['adresse']) && isset($_POST['surface']
                 $type = "Appartement";
                 break;
         }
-        
-
-        $property = new Property($type, $adresse, $surface, $prix);        
-
-        // $query = "INSERT INTO `proprietes`(`type`, `adresse`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
-        // $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
-
-        // $request->execute(array($property->getType(), $property->getAdresse(), $property->getSurface(), $property->getPrix()));
+    
+        $property = new Property($type, $adresse, $surface, $prix);    
 
         $property->insertInto($pdo, $property);
 

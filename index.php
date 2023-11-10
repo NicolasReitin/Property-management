@@ -170,9 +170,10 @@ $terrains = $request->fetchAll();
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Type de bien</th>
+                    <th scope="col">Nom du terrain</th>
                     <th scope="col">Adresse</th>
                     <th scope="col">Surface (en m²)</th>
+                    <th scope="col">Nombre de pièces</th>
                     <th scope="col">Prix (en €)</th>
                 </tr>
             </thead>
@@ -187,9 +188,10 @@ $terrains = $request->fetchAll();
                         ?>
                         <tr>
                             <th scope="row"><?= $property['id'] ?></th>
-                            <td><?= $property['type'] ?></td>
+                            <td><?= $property['terrain'] ?></td>
                             <td><?= $property['adresse'] ?></td>
                             <td><?= $property['surface'] ?></td>
+                            <td><?= $property['piece'] ?></td>
                             <td><?= $property['prix'] ?></td>
 
                             <td>

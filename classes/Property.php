@@ -1,15 +1,16 @@
 <?php 
-class Property {
-    private $type;
-    private $adresse;
-    private $surface;
-    private $prix;
+require_once 'SurfacePlusPrix.php';
 
-    public function __construct($type, $adresse, $surface, $prix) {
-        $this->type = $type;
+final class Property extends SurfacePlusPrix{
+    private $terrain;
+    private $adresse;
+    private $nombreDePiece;
+
+    public function __construct($terrain, $adresse, $surface, $nombreDePiece, $prix) {
+        parent::__construct($surface, $prix);
+        $this->terrain = $terrain;
         $this->adresse = $adresse;
-        $this->surface = $surface;
-        $this->prix = $prix;
+        $this->nombreDePiece = $nombreDePiece;
     }
 
     public function getType() : string{
@@ -44,7 +45,7 @@ class Property {
         
     }
 
-    public function insertInto($pdo, $property ){ //propriétés = nom de la variable de la bdd + nom de la variable prenant la classe Property
+    public function insertInto($pdo){ //propriétés = nom de la variable de la bdd + nom de la variable prenant la classe Property
         $query = "INSERT INTO `proprietes`(`type`, `adresse`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
         $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
 

@@ -1,15 +1,14 @@
 <?php 
-class Terrain {
+require_once 'SurfacePlusPrix.php';
+
+final class Terrain extends SurfacePlusPrix { //
     private $projet;
     private $ville;
-    private $surface;
-    private $prix;
 
     public function __construct($projet, $ville, $surface, $prix) {
+        parent::__construct($surface, $prix);
         $this->projet = $projet;
         $this->ville = $ville;
-        $this->surface = $surface;
-        $this->prix = $prix;
     }
 
     public function getProjet() : string{
@@ -44,11 +43,11 @@ class Terrain {
         
     }
 
-    public function insertInto($pdo, $terrain ){ //propriétés = nom de la variable de la bdd + nom de la variable prenant la classe Property
+    public function insertInto($pdo){ //propriétés = nom de la variable de la bdd + nom de la variable prenant la classe Property
         $query = "INSERT INTO `terrains`(`projet`, `ville`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
         $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
 
-        $request->execute(array($terrain->getProjet(), $terrain->getVille(), $terrain->getSurface(), $terrain->getPrix()));
+        $request->execute(array($this->projet, $this->ville, $this->surface, $this->prix));
     }
 
     
