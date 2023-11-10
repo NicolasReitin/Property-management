@@ -1,13 +1,13 @@
 <?php 
 class Terrain {
     private $projet;
-    private $adresse;
+    private $ville;
     private $surface;
     private $prix;
 
-    public function __construct($projet, $adresse, $surface, $prix) {
+    public function __construct($projet, $ville, $surface, $prix) {
         $this->projet = $projet;
-        $this->adresse = $adresse;
+        $this->ville = $ville;
         $this->surface = $surface;
         $this->prix = $prix;
     }
@@ -20,11 +20,11 @@ class Terrain {
 
     }
 
-    public function getAdresse() :string{
-        return $this->adresse;
+    public function getVille() :string{
+        return $this->ville;
     }
     
-    public function setAdresse(){
+    public function setVille(){
         
     }
     
@@ -44,11 +44,11 @@ class Terrain {
         
     }
 
-    public function insertInto($pdo, $property ){ //propriétés = nom de la variable de la bdd + nom de la variable prenant la classe Property
-        $query = "INSERT INTO `proprietes`(`type`, `adresse`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
+    public function insertInto($pdo, $terrain ){ //propriétés = nom de la variable de la bdd + nom de la variable prenant la classe Property
+        $query = "INSERT INTO `terrains`(`projet`, `ville`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
         $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
 
-        $request->execute(array($property->getType(), $property->getAdresse(), $property->getSurface(), $property->getPrix()));
+        $request->execute(array($terrain->getProjet(), $terrain->getVille(), $terrain->getSurface(), $terrain->getPrix()));
     }
 
     

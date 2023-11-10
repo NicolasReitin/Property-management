@@ -1,46 +1,28 @@
 <?php
-require_once '../classes/Property.php';
+require_once '../classes/Terrain.php';
 // use Property;
 require_once '../common/conn.php';
 
 
 // var_dump($_POST);
 
-if (isset($_POST['projetTerrain']) && isset($_POST['adresseTerrain']) && isset($_POST['surfaceTerrain']) && isset($_POST['prixTerrain'])){
-    if (!empty($_POST['projetTerrain']) && !empty($_POST['adresseTerrain']) && !empty($_POST['surfaceTerrain']) && !empty($_POST['prixTerrain'])){
+if (isset($_POST['projetTerrain']) && isset($_POST['villeTerrain']) && isset($_POST['surfaceTerrain']) && isset($_POST['prixTerrain'])){
+    if (!empty($_POST['projetTerrain']) && !empty($_POST['villeTerrain']) && !empty($_POST['surfaceTerrain']) && !empty($_POST['prixTerrain'])){
 
-        $type = strip_tags($_POST['projetTerrain']);
-        $adresse = strip_tags($_POST['adresseTerrain']);
+        $projet = strip_tags($_POST['projetTerrain']);
+        $ville = strip_tags($_POST['villeTerrain']);
         $surface = (int) strip_tags($_POST['surfaceTerrain']);
         $prix = (int) strip_tags($_POST['prixTerrain']);
 
-        switch ($type){
-            case 1 :
-                $type = "Terrain";
-                break;
-            case 2 :
-                $type = "Maison";
-                break;
-            case 3 :
-                $type = "Appartement";
-                break;
-        }
-        
+        $terrain = new Terrain($projet, $ville, $surface, $prix);        
 
-        $property = new Property($type, $adresse, $surface, $prix);        
+        $terrain->insertInto($pdo, $terrain);
 
-        // $query = "INSERT INTO `proprietes`(`type`, `adresse`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
-        // $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
-
-        // $request->execute(array($property->getType(), $property->getAdresse(), $property->getSurface(), $property->getPrix()));
-
-        $property->insertInto($pdo, $property);
-
-        // header('location: ../index.php');
+        header('location: ../index.php');
 
     }else{
-        // header('Location: ../index.php');
+        header('Location: ../index.php');
     }
 }else{
-    // header('Location: ../index.php');
+    header('Location: ../index.php');
 }

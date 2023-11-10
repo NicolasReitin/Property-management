@@ -1,5 +1,12 @@
 <?php 
 require_once 'common/conn.php';
+
+
+
+$select = 'SELECT * FROM terrains ORDER BY `ville` ASC';
+$request = $pdo->prepare($select);
+$request->execute();
+$terrains = $request->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +27,7 @@ require_once 'common/conn.php';
 <div class="containerOne d-flex justify-content-center gap-5">
     <div class="addGround">
         <h2 class="mb-3 ms-5">NOUVEAU TERRAIN</h2>
+        <hr>
         <form action="controllers\storeTerrain.php" method="post">
             <div class="form-group">
                 <label class="ms-5" for="projetTerrain"><h4>Nom du projet</h4></label>
@@ -29,10 +37,10 @@ require_once 'common/conn.php';
                 </div>
             </div>
             <div class="form-group">
-                <label class="ms-5" for="adresseTerrain"> <h4>Adresse</h4></label>
+                <label class="ms-5" for="villeTerrain"> <h4>Ville</h4></label>
                 <div class="d-flex gap-2">
-                    <input class="form-control ms-5 mb-2" type="text" name="adresseTerrain" id="adresseTerrain" style="width: 500px">
-                    <span class="retour" id="span_adresseTerrain"></span>
+                    <input class="form-control ms-5 mb-2" type="text" name="villeTerrain" id="villeTerrain" style="width: 500px">
+                    <span class="retour" id="span_villeTerrain"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -54,16 +62,23 @@ require_once 'common/conn.php';
             </div>
         </form>
     </div>
+
+    
     <div class="addProperty">
     <h2 class="mb-3 ms-5">NOUVELLE PROPRIETE</h2>
+    <hr>
         <form action="controllers\storeProperty.php" method="post">
             <div class="form-group">
                 <label class="ms-5" for="terrain"><h4>Terrain</h4></label>
                 <select name="terrain" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
                     <option selected disabled hidden>Selectionner le terrain</option>
-                    <option value="1">Terrain</option>
-                    <option value="2">Maison</option>
-                    <option value="3">Appartement</option>
+                    <?php 
+                        foreach ($terrains as $terrain) {
+                            echo '<option value="'.$terrain['id'].' ">'.$terrain['projet'].' - '.$terrain['ville'].'</option>';
+                        }
+
+                    ?>
+                    
                 </select>
                 <div class="col-sm-2">
                     <span class="retour" id="span_type"></span>
@@ -84,7 +99,7 @@ require_once 'common/conn.php';
                 </div>
             </div>
             <div class="form-group">
-                <label class="ms-5" for="piecesProperty"> <h4>Prix (en €)</h4></label>
+                <label class="ms-5" for="piecesProperty"> <h4>Nombre de pièces</h4></label>
                 <div class="d-flex gap-2">
                     <input class="form-control ms-5 mb-2" type="text" name="piecesProperty" id="piecesProperty" style="width: 500px">
                     <span class="retour" id="span_piecesProperty"></span>
@@ -104,58 +119,105 @@ require_once 'common/conn.php';
     </div>
 </div>
 
-
-
 <hr>
 
-<!-- liste de maison -->
-<h2 class="mb-3 ms-5">Liste des propriétées</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Type de bien</th>
-            <th scope="col">Adresse</th>
-            <th scope="col">Surface (en m²)</th>
-            <th scope="col">Prix (en €)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-            $select = 'SELECT * FROM proprietes ORDER BY `id` DESC';
-            $request = $pdo->prepare($select);
-            $request->execute();
-            $properties = $request->fetchAll();
-
-            foreach ($properties as $property) {
-                ?>
+<!-- liste des terrain et maisons -->
+<div class="containerTwo d-flex justify-content-center gap-5">
+    <div>
+        <h2 class="mb-3 ms-5">Liste des terrains</h2>
+        <table class="table">
+            <thead>
                 <tr>
-                    <th scope="row"><?= $property['id'] ?></th>
-                    <td><?= $property['type'] ?></td>
-                    <td><?= $property['adresse'] ?></td>
-                    <td><?= $property['surface'] ?></td>
-                    <td><?= $property['prix'] ?></td>
-
-                    <td>
-                        <!-- <a href="controllers/updateProperty.php?id=<?= $property['id'] ?>"> -->
-                        <a href="editProperty.php?id=<?= $property['id'] ?>">
-                            <button class="btn btn-warning" type="button">Edit</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="controllers/deleteProperty.php?id=<?= $property['id'] ?>">
-                            <button class="btn btn-danger" type="button">X</button>
-                        </a>
-                    </td>                </tr>
-
-
+                    <th scope="col">Id</th>
+                    <th scope="col">Nom du projet</th>
+                    <th scope="col">Ville</th>
+                    <th scope="col">Surface (en m²)</th>
+                    <th scope="col">Prix (en €)</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php
+                    
+                    foreach ($terrains as $terrain) {
+                        ?>
+                        <tr>
+                            <th scope="row"><?= $terrain['id'] ?></th>
+                            <td><?= $terrain['projet'] ?></td>
+                            <td><?= $terrain['ville'] ?></td>
+                            <td><?= $terrain['surface'] ?></td>
+                            <td><?= $terrain['prix'] ?></td>
+
+                            <td>
+                                <a href="editterrain.php?id=<?= $terrain['id'] ?>">
+                                    <button class="btn btn-warning" type="button">Edit</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="controllers/deleteterrain.php?id=<?= $terrain['id'] ?>">
+                                    <button class="btn btn-danger" type="button">X</button>
+                                </a>
+                            </td>                </tr>
+                        <?php
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h2 class="mb-3 ms-5">Liste des propriétées</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Type de bien</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Surface (en m²)</th>
+                    <th scope="col">Prix (en €)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $select = 'SELECT * FROM proprietes ORDER BY `id` DESC';
+                    $request = $pdo->prepare($select);
+                    $request->execute();
+                    $properties = $request->fetchAll();
+
+                    foreach ($properties as $property) {
+                        ?>
+                        <tr>
+                            <th scope="row"><?= $property['id'] ?></th>
+                            <td><?= $property['type'] ?></td>
+                            <td><?= $property['adresse'] ?></td>
+                            <td><?= $property['surface'] ?></td>
+                            <td><?= $property['prix'] ?></td>
+
+                            <td>
+                                <!-- <a href="controllers/updateProperty.php?id=<?= $property['id'] ?>"> -->
+                                <a href="editProperty.php?id=<?= $property['id'] ?>">
+                                    <button class="btn btn-warning" type="button">Edit</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="controllers/deleteProperty.php?id=<?= $property['id'] ?>">
+                                    <button class="btn btn-danger" type="button">X</button>
+                                </a>
+                            </td>                </tr>
+
+
+                        <?php
+                        
+                    }
+                ?>
                 
-            }
-        ?>
-        
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="js\script.js"></script>
