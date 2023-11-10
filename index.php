@@ -20,45 +20,92 @@ Chaque produit peut être une instance d'une classe. -->
 <h1 class="text-center mb-5">Gestion de propriétés</h1>
 
 <!-- formulaire d'ajout -->
-<h2 class="mb-3 ms-5">Ajouter une proprété</h2>
-<form action="controllers\storeProperty.php" method="post">
-    <div class="form-group">
-        <label class="ms-5" for="type"><h4>Type de bien</h4></label>
-        <select name="type" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
-            <option selected disabled hidden>Select le type de bien</option>
-            <option value="1">Terrain</option>
-            <option value="2">Maison</option>
-            <option value="3">Appartement</option>
-        </select>
-        <div class="col-sm-2">
-            <span class="retour" id="span_type"></span>
-        </div>
+<div class="containerOne d-flex justify-content-center gap-5">
+    <div class="addGround">
+        <h2 class="mb-3 ms-5">Ajouter un terrain</h2>
+        <form action="controllers\storeProperty.php" method="post">
+            <div class="form-group">
+                <label class="ms-5" for="type"><h4>Type de bien</h4></label>
+                <select name="type" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
+                    <option selected disabled hidden>Select le type de bien</option>
+                    <option value="1">Terrain</option>
+                    <option value="2">Maison</option>
+                    <option value="3">Appartement</option>
+                </select>
+                <div class="col-sm-2">
+                    <span class="retour" id="span_type"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="ms-5" for="adresse"> <h4>Adresse</h4></label>
+                <div class="d-flex gap-2">
+                    <input class="form-control ms-5 mb-2" type="text" name="adresse" id="adresse" style="width: 500px">
+                    <span class="retour" id="span_adresse"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="ms-5" for="surface"> <h4>Surface (en m²)</h4></label>
+                <div class="d-flex gap-2">
+                    <input class="form-control ms-5 mb-2" type="text" name="surface" id="surface" style="width: 500px">
+                    <span class="retour" id="span_surface"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="ms-5" for="prix"> <h4>Prix (en €)</h4></label>
+                <div class="d-flex gap-2">
+                    <input class="form-control ms-5 mb-2" type="text" name="prix" id="prix" style="width: 500px">
+                    <span class="retour" id="span_prix"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success ms-5 mt-3" type="submit">Ajouter</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label class="ms-5" for="adresse"> <h4>Adresse</h4></label>
-        <div class="d-flex gap-2">
-            <input class="form-control ms-5 mb-2" type="text" name="adresse" id="adresse" style="width: 500px">
-            <span class="retour" id="span_adresse"></span>
-        </div>
+    <div class="addProperty">
+    <h2 class="mb-3 ms-5">Ajouter une proprété</h2>
+        <form action="controllers\storeProperty.php" method="post">
+            <div class="form-group">
+                <label class="ms-5" for="type"><h4>Type de bien</h4></label>
+                <select name="type" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
+                    <option selected disabled hidden>Select le type de bien</option>
+                    <option value="1">Terrain</option>
+                    <option value="2">Maison</option>
+                    <option value="3">Appartement</option>
+                </select>
+                <div class="col-sm-2">
+                    <span class="retour" id="span_type"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="ms-5" for="adresse"> <h4>Adresse</h4></label>
+                <div class="d-flex gap-2">
+                    <input class="form-control ms-5 mb-2" type="text" name="adresse" id="adresse" style="width: 500px">
+                    <span class="retour" id="span_adresse"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="ms-5" for="surface"> <h4>Surface (en m²)</h4></label>
+                <div class="d-flex gap-2">
+                    <input class="form-control ms-5 mb-2" type="text" name="surface" id="surface" style="width: 500px">
+                    <span class="retour" id="span_surface"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="ms-5" for="prix"> <h4>Prix (en €)</h4></label>
+                <div class="d-flex gap-2">
+                    <input class="form-control ms-5 mb-2" type="text" name="prix" id="prix" style="width: 500px">
+                    <span class="retour" id="span_prix"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success ms-5 mt-3" type="submit">Ajouter</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label class="ms-5" for="surface"> <h4>Surface (en m²)</h4></label>
-        <div class="d-flex gap-2">
-            <input class="form-control ms-5 mb-2" type="text" name="surface" id="surface" style="width: 500px">
-            <span class="retour" id="span_surface"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="ms-5" for="prix"> <h4>Prix (en €)</h4></label>
-        <div class="d-flex gap-2">
-            <input class="form-control ms-5 mb-2" type="text" name="prix" id="prix" style="width: 500px">
-            <span class="retour" id="span_prix"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-success ms-5 mt-3" type="submit">Ajouter</button>
-    </div>
-</form>
+</div>
+
+
 
 <hr>
 
