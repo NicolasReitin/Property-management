@@ -54,16 +54,20 @@ final class Property extends SurfacePlusPrix{
     }
 
     public function insertInto($pdo){ //propriétés = nom de la variable de la bdd + nom de la variable prenant la classe Property
-        $query = "INSERT INTO `proprietes`(`type`, `adresse`, `surface`, `prix`) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO `proprietes`(`terrain`, `adresse`, `surface`, `piece`, `prix`) VALUES (?, ?, ?, ?, ?)";
+
         $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
 
         $request->execute(array($this->terrain, $this->adresse, $this->surface, $this->nombreDePieces, $this->prix));
     }
 
+    public function update($pdo){
+        $query = "UPDATE `proprietes` SET `terrain`=?, `adresse`=?, `surface`=?, `piece`= ?, `prix`=? WHERE `id`= ?";
+
+        $request = $pdo->prepare($query) or die(print_r($pdo->errorInfo()));
+
+        $request->execute(array($this->terrain, $this->adresse, $this->surface, $this->nombreDePieces, $this->prix, $_GET['id']));
+    }
     
-
-    
-
-
 
 }

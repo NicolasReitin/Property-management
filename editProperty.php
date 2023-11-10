@@ -21,53 +21,83 @@ require_once 'classes/Property.php';
 <h2 class="mb-3 ms-5">Modifier la proprété</h2>
 
 <?php
-            $select = 'SELECT * FROM proprietes WHERE `id` ='.$_GET['id'];
-            $request = $pdo->prepare($select);
-            $request->execute();
-            $property = $request->fetch();
+    $selectAll = 'SELECT * FROM proprietes';
+    $requestAll = $pdo->prepare($selectAll);
+    $requestAll->execute();
+    $properties = $requestAll->fetchAll();
 
-            $type = $property['type'];
-            $adresse  = $property['adresse'];
-            $surface = $property['surface'];
-            $prix = $property['prix'];
 
-            $property = new Property($type, $adresse, $surface, $prix);
+    $select = 'SELECT * FROM proprietes WHERE `id` ='.$_GET['id'];
+    $request = $pdo->prepare($select);
+    $request->execute();
+    $property = $request->fetch();
 
-            switch ($property->getType()){
-                case 'Terrain' :
-                    // $property->setType() = 1;
-                    $type = 1;
-                    break;
-                case "Maison" :
-                    $type = 2;
-                    break;
-                case "Appartement" :
-                    $type = 3;
-                    break;
-            }            
+    $id = $property['id'];
+    $terrain = $property['terrain'];
+    $adresse  = $property['adresse'];
+    $surface = $property['surface'];
+    $nbrDePieces = $property['piece'];
+    $prix = $property['prix'];
+
+    $property = new Property($terrain, $adresse, $surface,$nbrDePieces, $prix);    
 ?>
 
-<form action="controllers/updateProperty?id=<?= $_GET['id'] ?>" method="post">
-    <label class="ms-5" for="type"><h4>Type de bien</h4></label>
-    <select name="type" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
-        <option selected disabled hidden>Select type</option>
-        <option value="1" <?= ($type == 1) ? 'selected' : '' ?> >Terrain</option>
-        <option value="2" <?= ($type == 2) ? 'selected' : '' ?> >Maison</option>
-        <option value="3" <?= ($type == 3) ? 'selected' : '' ?> >Appartement</option>
-    </select>
+<form action="controllers\updateProperty.php?id=<?= $id ?>" method="post">
+            <div class="form-group">
+                <label class="ms-5" for="terrain"><h4>Terrain</h4></label>
+                <select name="terrain" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
+                    <option selected value="<?= $id ?>"><?= $terrain ." - ". $adresse ?></option>
+                    <?php 
+                    //options selon les terrains de la BDD
+                        foreach ($properties as $propriete) {
+                            ?>
+                                <option value="<?= $propriete['id'] ?>">
+                                    <?= $propriete['terrain']." - ".$propriete['adresse']?>
+                                </option>
 
-    <label class="ms-5" for="adresse"> <h4>Adresse</h4></label>
-    <input class="form-control ms-5 mb-2" type="text" name="adresse" id="adresse" style="width: 500px" value="<?= $property->getAdresse() ?>">
-
-    <label class="ms-5" for="surface"> <h4>Surface (en m²)</h4></label>
-    <input class="form-control ms-5 mb-2" type="text" name="surface" id="surface" style="width: 500px" value="<?= $property->getSurface() ?>">
-    
-    <label class="ms-5" for="prix"> <h4>Prix (en €)</h4></label>
-    <input class="form-control ms-5 mb-2" type="text" name="prix" id="prix" style="width: 500px" value="<?= $property->getPrix() ?>">
-
-    <button class="btn btn-warning ms-5 mt-3" type="submit">Modifier</button>
-
-</form>
+                            <?php
+                        }
+                    ?>
+                </select>
+                <div class="col-sm-2">
+                    <span class="retour" id="span_type"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="ms-5" for="adresseProperty"> <h4>Adresse</h4></label>
+                <div class="d-flex gap-2">
+                    <input class="form-control ms-5 mb-2" type="text" name="adresseProperty" id="adresseProperty" style="width: 500px" value="<?= $adresse ?>">
+                    <span class="retour" id="span_adresseProperty"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="ms-5" for="surfaceProperty"> <h4>Surface (en m²)</h4></label>
+                <div class="d-flex gap-2">
+                    <input class="form-control ms-5 mb-2" type="text" name="surfaceProperty" id="surfaceProperty" style="width: 500px" value="<?= $surface ?>">
+                    <span class="retour" id="span_surfaceProperty"></span>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="form-group">
+                    <label class="ms-5" for="piecesProperty"> <h4>Nombre de pièces</h4></label>
+                    <div class="d-flex gap-2">
+                        <input class="form-control ms-5 mb-2" type="text" name="piecesProperty" id="piecesProperty" style="width: 225px" value="<?= $nbrDePieces ?>">
+                        <span class="retour" id="span_piecesProperty"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="ms-5" for="prixProperty"> <h4>Prix (en €)</h4></label>
+                    <div class="d-flex gap-2">
+                        <input class="form-control ms-5 mb-2" type="text" name="prixProperty" id="prixProperty" style="width: 225px" value="<?= $prix ?>">
+                        <span class="retour" id="span_prixProperty"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button class="btn btn-secondary ms-5 mt-3" type="submit">Ajouter</button>
+            </div>
+        </form>
 
     
 </body>

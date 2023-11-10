@@ -4,29 +4,20 @@ require_once '../classes/Property.php';
 require_once '../common/conn.php';
 
 
-// var_dump($_POST);
+var_dump($_POST);
+// die();
 
-if (isset($_POST['type']) && isset($_POST['adresse']) && isset($_POST['surface']) && isset($_POST['prix'])){
-    if (!empty($_POST['type']) && !empty($_POST['adresse']) && !empty($_POST['surface']) && !empty($_POST['prix'])){
+if (isset($_POST['terrain']) && isset($_POST['adresseProperty']) && isset($_POST['surfaceProperty']) && isset($_POST['piecesProperty']) && isset($_POST['prixProperty'])){
 
-        $type = strip_tags($_POST['type']);
-        $adresse = strip_tags($_POST['adresse']);
-        $surface = (int) strip_tags($_POST['surface']);
-        $prix = (int) strip_tags($_POST['prix']);
+    if (!empty($_POST['terrain']) && !empty($_POST['adresseProperty']) && !empty($_POST['surfaceProperty']) && !empty($_POST['piecesProperty']) && !empty($_POST['prixProperty'])){
 
-        switch ($type){
-            case 1 :
-                $type = "Terrain";
-                break;
-            case 2 :
-                $type = "Maison";
-                break;
-            case 3 :
-                $type = "Appartement";
-                break;
-        }
+        $terrain = strip_tags($_POST['terrain']);
+        $adresse = strip_tags($_POST['adresseProperty']);
+        $surface = (int) strip_tags($_POST['surfaceProperty']);
+        $nbrDePieces = (int) strip_tags($_POST['piecesProperty']);
+        $prix = (int) strip_tags($_POST['prixProperty']);
     
-        $property = new Property($type, $adresse, $surface, $prix);    
+        $property = new Property($terrain, $adresse, $surface,$nbrDePieces, $prix);    
 
         $property->insertInto($pdo, $property);
 

@@ -76,9 +76,7 @@ $terrains = $request->fetchAll(); //récupère le résultat
                         foreach ($terrains as $terrain) {
                             echo '<option value="'.$terrain['id'].' ">'.$terrain['projet'].' - '.$terrain['ville'].'</option>';
                         }
-
                     ?>
-                    
                 </select>
                 <div class="col-sm-2">
                     <span class="retour" id="span_type"></span>
@@ -98,20 +96,23 @@ $terrains = $request->fetchAll(); //récupère le résultat
                     <span class="retour" id="span_surfaceProperty"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="ms-5" for="piecesProperty"> <h4>Nombre de pièces</h4></label>
-                <div class="d-flex gap-2">
-                    <input class="form-control ms-5 mb-2" type="text" name="piecesProperty" id="piecesProperty" style="width: 500px">
-                    <span class="retour" id="span_piecesProperty"></span>
+            <div class="d-flex">
+                <div class="form-group">
+                    <label class="ms-5" for="piecesProperty"> <h4>Nombre de pièces</h4></label>
+                    <div class="d-flex gap-2">
+                        <input class="form-control ms-5 mb-2" type="text" name="piecesProperty" id="piecesProperty" style="width: 225px">
+                        <span class="retour" id="span_piecesProperty"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="ms-5" for="prixProperty"> <h4>Prix (en €)</h4></label>
+                    <div class="d-flex gap-2">
+                        <input class="form-control ms-5 mb-2" type="text" name="prixProperty" id="prixProperty" style="width: 225px">
+                        <span class="retour" id="span_prixProperty"></span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="ms-5" for="prixProperty"> <h4>Prix (en €)</h4></label>
-                <div class="d-flex gap-2">
-                    <input class="form-control ms-5 mb-2" type="text" name="prixProperty" id="prixProperty" style="width: 500px">
-                    <span class="retour" id="span_prixProperty"></span>
-                </div>
-            </div>
+            
             <div class="form-group">
                 <button class="btn btn-secondary ms-5 mt-3" type="submit">Ajouter</button>
             </div>
