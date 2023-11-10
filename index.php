@@ -14,61 +14,53 @@ require_once 'common/conn.php';
 </head>
 <body>
 
-<!-- Gestionnaire de propriétés :
-Développez un gestionnaire de produits où vous pouvez ajouter, modifier et supprimer des produits. 
-Chaque produit peut être une instance d'une classe. -->
 <h1 class="text-center mb-5">Gestion de propriétés</h1>
 
 <!-- formulaire d'ajout -->
 <div class="containerOne d-flex justify-content-center gap-5">
     <div class="addGround">
-        <h2 class="mb-3 ms-5">Ajouter un terrain</h2>
-        <form action="controllers\storeProperty.php" method="post">
+        <h2 class="mb-3 ms-5">NOUVEAU TERRAIN</h2>
+        <form action="controllers\storeTerrain.php" method="post">
             <div class="form-group">
-                <label class="ms-5" for="type"><h4>Type de bien</h4></label>
-                <select name="type" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
-                    <option selected disabled hidden>Select le type de bien</option>
-                    <option value="1">Terrain</option>
-                    <option value="2">Maison</option>
-                    <option value="3">Appartement</option>
-                </select>
+                <label class="ms-5" for="projetTerrain"><h4>Nom du projet</h4></label>
+                <input class="form-control ms-5 mb-2" type="text" name="projetTerrain" id="projetTerrain" style="width: 500px">
                 <div class="col-sm-2">
-                    <span class="retour" id="span_type"></span>
+                    <span class="retour" id="span_projetTerrain"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="ms-5" for="adresse"> <h4>Adresse</h4></label>
+                <label class="ms-5" for="adresseTerrain"> <h4>Adresse</h4></label>
                 <div class="d-flex gap-2">
-                    <input class="form-control ms-5 mb-2" type="text" name="adresse" id="adresse" style="width: 500px">
-                    <span class="retour" id="span_adresse"></span>
+                    <input class="form-control ms-5 mb-2" type="text" name="adresseTerrain" id="adresseTerrain" style="width: 500px">
+                    <span class="retour" id="span_adresseTerrain"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="ms-5" for="surface"> <h4>Surface (en m²)</h4></label>
+                <label class="ms-5" for="surfaceTerrain"> <h4>Surface (en m²)</h4></label>
                 <div class="d-flex gap-2">
-                    <input class="form-control ms-5 mb-2" type="text" name="surface" id="surface" style="width: 500px">
-                    <span class="retour" id="span_surface"></span>
+                    <input class="form-control ms-5 mb-2" type="text" name="surfaceTerrain" id="surfaceTerrain" style="width: 500px">
+                    <span class="retour" id="span_surfaceTerrain"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="ms-5" for="prix"> <h4>Prix (en €)</h4></label>
+                <label class="ms-5" for="prixTerrain"> <h4>Prix (en €)</h4></label>
                 <div class="d-flex gap-2">
-                    <input class="form-control ms-5 mb-2" type="text" name="prix" id="prix" style="width: 500px">
-                    <span class="retour" id="span_prix"></span>
+                    <input class="form-control ms-5 mb-2" type="text" name="prixTerrain" id="prixTerrain" style="width: 500px">
+                    <span class="retour" id="span_prixTerrain"></span>
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-success ms-5 mt-3" type="submit">Ajouter</button>
+                <button class="btn btn-secondary ms-5 mt-3" type="submit">Ajouter</button>
             </div>
         </form>
     </div>
     <div class="addProperty">
-    <h2 class="mb-3 ms-5">Ajouter une proprété</h2>
+    <h2 class="mb-3 ms-5">NOUVELLE PROPRIETE</h2>
         <form action="controllers\storeProperty.php" method="post">
             <div class="form-group">
-                <label class="ms-5" for="type"><h4>Type de bien</h4></label>
-                <select name="type" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
-                    <option selected disabled hidden>Select le type de bien</option>
+                <label class="ms-5" for="terrain"><h4>Terrain</h4></label>
+                <select name="terrain" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
+                    <option selected disabled hidden>Selectionner le terrain</option>
                     <option value="1">Terrain</option>
                     <option value="2">Maison</option>
                     <option value="3">Appartement</option>
@@ -78,28 +70,35 @@ Chaque produit peut être une instance d'une classe. -->
                 </div>
             </div>
             <div class="form-group">
-                <label class="ms-5" for="adresse"> <h4>Adresse</h4></label>
+                <label class="ms-5" for="adresseProperty"> <h4>Adresse</h4></label>
                 <div class="d-flex gap-2">
-                    <input class="form-control ms-5 mb-2" type="text" name="adresse" id="adresse" style="width: 500px">
-                    <span class="retour" id="span_adresse"></span>
+                    <input class="form-control ms-5 mb-2" type="text" name="adresseProperty" id="adresseProperty" style="width: 500px">
+                    <span class="retour" id="span_adresseProperty"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="ms-5" for="surface"> <h4>Surface (en m²)</h4></label>
+                <label class="ms-5" for="surfaceProperty"> <h4>Surface (en m²)</h4></label>
                 <div class="d-flex gap-2">
-                    <input class="form-control ms-5 mb-2" type="text" name="surface" id="surface" style="width: 500px">
-                    <span class="retour" id="span_surface"></span>
+                    <input class="form-control ms-5 mb-2" type="text" name="surfaceProperty" id="surfaceProperty" style="width: 500px">
+                    <span class="retour" id="span_surfaceProperty"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="ms-5" for="prix"> <h4>Prix (en €)</h4></label>
+                <label class="ms-5" for="piecesProperty"> <h4>Prix (en €)</h4></label>
                 <div class="d-flex gap-2">
-                    <input class="form-control ms-5 mb-2" type="text" name="prix" id="prix" style="width: 500px">
-                    <span class="retour" id="span_prix"></span>
+                    <input class="form-control ms-5 mb-2" type="text" name="piecesProperty" id="piecesProperty" style="width: 500px">
+                    <span class="retour" id="span_piecesProperty"></span>
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-success ms-5 mt-3" type="submit">Ajouter</button>
+                <label class="ms-5" for="prixProperty"> <h4>Prix (en €)</h4></label>
+                <div class="d-flex gap-2">
+                    <input class="form-control ms-5 mb-2" type="text" name="prixProperty" id="prixProperty" style="width: 500px">
+                    <span class="retour" id="span_prixProperty"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-secondary ms-5 mt-3" type="submit">Ajouter</button>
             </div>
         </form>
     </div>
