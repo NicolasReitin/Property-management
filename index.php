@@ -6,6 +6,13 @@ $select = 'SELECT * FROM terrains ORDER BY `ville` ASC';
 $request = $pdo->prepare($select);
 $request->execute();
 $terrains = $request->fetchAll(); //récupère le résultat
+
+// select toutes les propriétés de la BDD
+$select = 'SELECT * FROM proprietes ORDER BY `id` DESC';
+$request = $pdo->prepare($select);
+$request->execute();
+$properties = $request->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -122,103 +129,112 @@ $terrains = $request->fetchAll(); //récupère le résultat
 
 <hr>
 
-<!-- liste des terrain et maisons -->
-<div class="containerTwo d-flex justify-content-center gap-5">
-    <div>
-        <h2 class="mb-3 ms-5">Liste des terrains</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nom du projet</th>
-                    <th scope="col">Ville</th>
-                    <th scope="col">Surface (en m²)</th>
-                    <th scope="col">Prix (en €)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    // tableau avec les valeur de la BDD avec un foreach pour toutes les faire apparaitre
-                    foreach ($terrains as $terrain) {
-                        ?>
+
+    <!-- liste des terrain et maisons -->
+
+    <div class="containerTwo d-flex justify-content-center gap-5">
+    <?php
+
+        if ($terrains){ //affichage de la partie tableau uniquement s'il y a des terrains dans la bdd
+            ?>
+            <div>
+                <h2 class="mb-3 ms-5">Liste des terrains</h2>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <th scope="row"><?= $terrain['id'] ?></th>
-                            <td><?= $terrain['projet'] ?></td>
-                            <td><?= $terrain['ville'] ?></td>
-                            <td><?= $terrain['surface'] ?></td>
-                            <td><?= $terrain['prix'] ?></td>
-
-                            <td>
-                                <a href="editterrain.php?id=<?= $terrain['id'] ?>">
-                                    <button class="btn btn-warning" type="button">Edit</button>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="controllers/deleteterrain.php?id=<?= $terrain['id'] ?>">
-                                    <button class="btn btn-danger" type="button">X</button>
-                                </a>
-                            </td>                </tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nom du projet</th>
+                            <th scope="col">Ville</th>
+                            <th scope="col">Surface (en m²)</th>
+                            <th scope="col">Prix (en €)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                    }
-                ?>
-            </tbody>
-        </table>
-    </div>
-
-    <div>
-        <h2 class="mb-3 ms-5">Liste des propriétées</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nom du terrain</th>
-                    <th scope="col">Adresse</th>
-                    <th scope="col">Surface (en m²)</th>
-                    <th scope="col">Nombre de pièces</th>
-                    <th scope="col">Prix (en €)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // select toutes les propriétés de la BDD
-                    $select = 'SELECT * FROM proprietes ORDER BY `id` DESC';
-                    $request = $pdo->prepare($select);
-                    $request->execute();
-                    $properties = $request->fetchAll();
-
-                    foreach ($properties as $property) {
+                            // tableau avec les valeur de la BDD avec un foreach pour toutes les faire apparaitre
+                            foreach ($terrains as $terrain) {
+                                ?>
+                                <tr>
+                                    <th scope="row"><?= $terrain['id'] ?></th>
+                                    <td><?= $terrain['projet'] ?></td>
+                                    <td><?= $terrain['ville'] ?></td>
+                                    <td><?= $terrain['surface'] ?></td>
+                                    <td><?= $terrain['prix'] ?></td>
+        
+                                    <td>
+                                        <a href="editterrain.php?id=<?= $terrain['id'] ?>">
+                                            <button class="btn btn-warning" type="button">Edit</button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="controllers/deleteterrain.php?id=<?= $terrain['id'] ?>">
+                                            <button class="btn btn-danger" type="button">X</button>
+                                        </a>
+                                    </td>                </tr>
+                                <?php
+                            }
                         ?>
-                        <tr>
-                            <th scope="row"><?= $property['id'] ?></th>
-                            <td><?= $property['terrain'] ?></td>
-                            <td><?= $property['adresse'] ?></td>
-                            <td><?= $property['surface'] ?></td>
-                            <td><?= $property['piece'] ?></td>
-                            <td><?= $property['prix'] ?></td>
-
-                            <td>
-                                <!-- affiche un bouton et on lui rajoute dans l'url de destination l'id pour le récupérer dans le store -->
-                                <a href="editProperty.php?id=<?= $property['id'] ?>">
-                                    <button class="btn btn-warning" type="button">Edit</button>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="controllers/deleteProperty.php?id=<?= $property['id'] ?>">
-                                    <button class="btn btn-danger" type="button">X</button>
-                                </a>
-                            </td>                </tr>
-
-
-                        <?php
-                        
-                    }
-                ?>
-                
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+        <?php
+        }
+        if ($properties){ //affichage de la partie tableau uniquement s'il y a des terrains dans la bdd
+        ?>
+    
+        <div>
+            <h2 class="mb-3 ms-5">Liste des propriétées</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nom du terrain</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Surface (en m²)</th>
+                        <th scope="col">Nombre de pièces</th>
+                        <th scope="col">Prix (en €)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php    
+                        foreach ($properties as $property) {
+                            ?>
+                            <tr>
+                                <th scope="row"><?= $property['id'] ?></th>
+                                <td><?= $property['terrain'] ?></td>
+                                <td><?= $property['adresse'] ?></td>
+                                <td><?= $property['surface'] ?></td>
+                                <td><?= $property['piece'] ?></td>
+                                <td><?= $property['prix'] ?></td>
+    
+                                <td>
+                                    <!-- affiche un bouton et on lui rajoute dans l'url de destination l'id pour le récupérer dans le store -->
+                                    <a href="editProperty.php?id=<?= $property['id'] ?>">
+                                        <button class="btn btn-warning" type="button">Edit</button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="controllers/deleteProperty.php?id=<?= $property['id'] ?>">
+                                        <button class="btn btn-danger" type="button">X</button>
+                                    </a>
+                                </td>                </tr>
+    
+    
+                            <?php
+                            
+                        }
+                    ?>
+                    
+                </tbody>
+            </table>
+        </div>
+        <?php
+        }
+        ?>
+    
     </div>
+    
 
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="js\script.js"></script>

@@ -1,6 +1,6 @@
 <?php 
-require_once 'common/conn.php';
-require_once 'classes/Property.php';
+require_once 'common/conn.php'; // appel de la BDD
+require_once 'classes/Property.php'; // appel de la classe Property
 
 ?>
 
@@ -21,12 +21,13 @@ require_once 'classes/Property.php';
 <h2 class="mb-3 ms-5">Modifier la proprété</h2>
 
 <?php
+// select l'ensemble des terrain pour les afficher dans le select 
     $selectAll = 'SELECT * FROM proprietes';
     $requestAll = $pdo->prepare($selectAll);
     $requestAll->execute();
     $properties = $requestAll->fetchAll();
 
-
+// select le terrain avec l'id envoyé par la méthode GET afin de l'afficher
     $select = 'SELECT * FROM proprietes WHERE `id` ='.$_GET['id'];
     $request = $pdo->prepare($select);
     $request->execute();
@@ -39,7 +40,10 @@ require_once 'classes/Property.php';
     $nbrDePieces = $property['piece'];
     $prix = $property['prix'];
 
-    $property = new Property($terrain, $adresse, $surface,$nbrDePieces, $prix);    
+    // appel de la classe Property avec son constructeur
+    $property = new Property($terrain, $adresse, $surface,$nbrDePieces, $prix);   
+
+    // utilisation des la classe puis pré-affichage des informations récupérées en BDD dans les input 
 ?>
 
 <form action="controllers\updateProperty.php?id=<?= $id ?>" method="post">
