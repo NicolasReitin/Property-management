@@ -1,6 +1,6 @@
 <?php 
-require_once 'common/conn.php'; // appel de la BDD
-require_once 'classes/Property.php'; // appel de la classe Property
+require_once '../common/conn.php'; // appel de la BDD
+require_once '../classes/Property.php'; // appel de la classe Property
 
 ?>
 
@@ -46,7 +46,7 @@ require_once 'classes/Property.php'; // appel de la classe Property
     // utilisation des la classe puis pré-affichage des informations récupérées en BDD dans les input 
 ?>
 
-<form action="controllers\updateProperty.php?id=<?= $id ?>" method="post">
+<form action="../controllers\updateProperty.php?id=<?= $id ?>" method="post">
             <div class="form-group">
                 <label class="ms-5" for="terrain"><h4>Terrain</h4></label>
                 <select name="terrain" class="form-select ms-5 mb-2" aria-label="Default select example" style="width: 500px">
@@ -99,7 +99,7 @@ require_once 'classes/Property.php'; // appel de la classe Property
             </div>
             
             <div class="form-group">
-                <button class="btn btn-secondary ms-5 mt-3" type="submit">Ajouter</button>
+                <button class="btn btn-warning ms-5 mt-3" type="submit">Modifier</button>
             </div>
         </form>
 

@@ -162,7 +162,7 @@ $properties = $request->fetchAll();
                                     <td><?= $terrain['prix'] ?></td>
         
                                     <td>
-                                        <a href="editterrain.php?id=<?= $terrain['id'] ?>">
+                                        <a href="views/editterrain.php?id=<?= $terrain['id'] ?>">
                                             <button class="btn btn-warning" type="button">Edit</button>
                                         </a>
                                     </td>
@@ -209,7 +209,7 @@ $properties = $request->fetchAll();
     
                                 <td>
                                     <!-- affiche un bouton et on lui rajoute dans l'url de destination l'id pour le récupérer dans le store -->
-                                    <a href="editProperty.php?id=<?= $property['id'] ?>">
+                                    <a href="views/editProperty.php?id=<?= $property['id'] ?>">
                                         <button class="btn btn-warning" type="button">Edit</button>
                                     </a>
                                 </td>

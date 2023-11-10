@@ -1,6 +1,6 @@
 <?php 
-require_once 'common/conn.php'; // appel de la BDD
-require_once 'classes/Terrain.php'; // appel de la classe Terrain
+require_once '../common/conn.php'; // appel de la BDD
+require_once '../classes/Terrain.php'; // appel de la classe Terrain
 
 ?>
 
@@ -35,7 +35,7 @@ require_once 'classes/Terrain.php'; // appel de la classe Terrain
     
     // utilisation des la classe puis pré-affichage des informations récupérées en BDD dans les input
 ?>
-<form action="controllers\updateTerrain.php?id=<?= $_GET['id'] ?>" method="post">
+<form action="../controllers\updateTerrain.php?id=<?= $_GET['id'] ?>" method="post">
             <div class="form-group">
                 <label class="ms-5" for="projetTerrain"><h4>Nom du projet</h4></label>
                 <input class="form-control ms-5 mb-2" type="text" name="projetTerrain" id="projetTerrain" style="width: 500px" value="<?= $terrain->getProjet() ?>">
